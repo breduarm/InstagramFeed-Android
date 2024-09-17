@@ -24,7 +24,7 @@ class FeedViewModel: ViewModel() {
     fun addToFavorites(post: PostDomain) {
         _posts.value = posts.value?.map { item ->
             if (item.id == post.id) {
-                item.copy(isMarkAsFavorite = true)
+                item.copy(isMarkAsFavorite = !post.isMarkAsFavorite)
             } else {
                 item
             }
