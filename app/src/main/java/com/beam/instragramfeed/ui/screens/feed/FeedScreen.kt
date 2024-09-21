@@ -1,4 +1,4 @@
-package com.beam.instragramfeed.ui.screens
+package com.beam.instragramfeed.ui.screens.feed
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -29,7 +29,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.beam.instragramfeed.domain.PostDomain
+import com.beam.instragramfeed.domain.model.PostDomain
 
 @Composable
 fun FeedScreen(viewModel: FeedViewModel, modifier: Modifier) {

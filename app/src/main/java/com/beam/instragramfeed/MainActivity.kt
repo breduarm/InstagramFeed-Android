@@ -9,8 +9,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.beam.instragramfeed.ui.screens.FeedScreen
-import com.beam.instragramfeed.ui.screens.FeedViewModel
+import com.beam.instragramfeed.ui.screens.feed.FeedScreen
+import com.beam.instragramfeed.ui.screens.feed.FeedViewModel
 import com.beam.instragramfeed.ui.theme.InstragramFeedTheme
 
 class MainActivity : ComponentActivity() {

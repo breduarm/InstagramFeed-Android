@@ -1,9 +1,9 @@
-package com.beam.instragramfeed.data.remote.datasource
+package com.beam.instragramfeed.data.datasource
 
-import com.beam.instragramfeed.api.retrofit
-import com.beam.instragramfeed.api.service.PostService
-import com.beam.instragramfeed.data.remote.response.PostResponse
-import com.beam.instragramfeed.domain.PostDomain
+import com.beam.instragramfeed.data.remote.api.retrofit
+import com.beam.instragramfeed.data.remote.api.service.PostService
+import com.beam.instragramfeed.data.remote.model.PostResponse
+import com.beam.instragramfeed.domain.model.PostDomain
 
 interface PostDataSource {
 

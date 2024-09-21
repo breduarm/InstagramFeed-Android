@@ -1,6 +1,6 @@
-package com.beam.instragramfeed.usecase
+package com.beam.instragramfeed.domain.usecase
 
-import com.beam.instragramfeed.data.remote.repository.PostRepository
+import com.beam.instragramfeed.data.repository.PostRepository
 
 class GetPostsUseCase {
     private val repository = PostRepository()

@@ -1,4 +1,4 @@
-package com.beam.instragramfeed.domain
+package com.beam.instragramfeed.domain.model
 
 data class PostDomain(
     val id: Int,

@@ -1,11 +1,11 @@
-package com.beam.instragramfeed.ui.screens
+package com.beam.instragramfeed.ui.screens.feed
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.beam.instragramfeed.domain.PostDomain
-import com.beam.instragramfeed.usecase.GetPostsUseCase
+import com.beam.instragramfeed.domain.model.PostDomain
+import com.beam.instragramfeed.domain.usecase.GetPostsUseCase
 import kotlinx.coroutines.launch
 
 class FeedViewModel: ViewModel() {

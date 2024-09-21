@@ -1,4 +1,4 @@
-package com.beam.instragramfeed.data.remote.response
+package com.beam.instragramfeed.data.remote.model
 
 data class PostResponse(
     val id: Int,
