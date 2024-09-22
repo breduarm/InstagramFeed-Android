@@ -79,4 +79,9 @@ dependencies {
     // Room
     implementation(libs.room)
     kapt(libs.room.compiler)
+
+    // Unit Tests
+
+    // MockK
+    testImplementation(libs.mockk)
 }

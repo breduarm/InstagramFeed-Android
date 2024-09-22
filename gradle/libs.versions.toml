@@ -19,6 +19,11 @@ retrofit = "2.11.0"
 # Room
 room = "2.6.1"
 
+# Unit Tests
+
+# MockK
+mockk = "1.13.12"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -46,6 +51,11 @@ retrofit-converter = { group = "com.squareup.retrofit2", name = "converter-gson"
 # Room
 room = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+
+# Unit Tests
+
+# MockK
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
