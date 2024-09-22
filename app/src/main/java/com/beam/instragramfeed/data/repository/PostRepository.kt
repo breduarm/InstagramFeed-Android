@@ -20,6 +20,6 @@ class PostRepository(context: Context) {
     suspend fun getPostsFromLocal(): List<Post> = localDataSource.getAllPosts()
 
     private suspend fun savePostsToLocal(posts: List<Post>) {
-        localDataSource.insertPosts(posts)
+        localDataSource.savePosts(posts)
     }
 }
