@@ -3,11 +3,14 @@ package com.beam.instragramfeed.ui.screens.feed
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -36,22 +39,21 @@ import coil.compose.AsyncImage
 import com.beam.instragramfeed.domain.model.Post
 
 @Composable
-fun FeedScreen(viewModel: FeedViewModel, modifier: Modifier) {
+fun FeedScreen(viewModel: FeedViewModel) {
     val posts: List<Post> by viewModel.posts.observeAsState(emptyList())
 
     LaunchedEffect(viewModel) {
         viewModel.onUiReady()
     }
 
-    FeedContent(posts, viewModel::addToFavorites, viewModel::deleteAllPosts, modifier)
+    FeedContent(posts, viewModel::addToFavorites, viewModel::deleteAllPosts)
 }
 
 @Composable
 fun FeedContent(
     posts: List<Post>,
     onItemClicked: (Post) -> Unit,
-    onFABClicked: () -> Unit,
-    modifier: Modifier
+    onFABClicked: () -> Unit
 ) {
     Scaffold(
         floatingActionButton = {
@@ -63,26 +65,29 @@ fun FeedContent(
                 Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete")
             }
         },
-        modifier = modifier.fillMaxSize()
+        contentWindowInsets = WindowInsets.safeDrawing,
+        modifier = Modifier.fillMaxSize()
     ) { innerPadding ->
-        Box(modifier = modifier
-            .fillMaxSize()
-            .padding(innerPadding)) {
+        Box(modifier = Modifier.fillMaxSize()) {
             if (posts.isEmpty()) {
                 Text(
                     text = "There is no posts to display",
                     modifier = Modifier.align(Alignment.Center)
                 )
             } else {
-                FeedList(posts, onItemClicked)
+                FeedList(
+                    posts = posts,
+                    onItemClicked = onItemClicked,
+                    contentPadding = innerPadding
+                )
             }
         }
     }
 }
 
 @Composable
-fun FeedList(posts: List<Post>, onItemClicked: (Post) -> Unit) {
-    LazyColumn(verticalArrangement = Arrangement.spacedBy(24.dp)) {
+fun FeedList(posts: List<Post>, onItemClicked: (Post) -> Unit, contentPadding: PaddingValues) {
+    LazyColumn(contentPadding = contentPadding, verticalArrangement = Arrangement.spacedBy(24.dp)) {
         items(posts) { item ->
             PostItem(item, onItemClicked)
         }
@@ -110,7 +115,7 @@ fun PostItem(post: Post, onItemClicked: (Post) -> Unit) {
                 modifier = Modifier
                     .weight(1f)
                     .padding(start = 24.dp)
-                    .padding(vertical = 12.dp)
+                    .align(Alignment.CenterVertically)
             )
             FavoriteButton(isFavorite = post.isMarkAsFavorite) {
                 onItemClicked(post)
@@ -162,5 +167,5 @@ fun FeedScreenPreview() {
         )
     )
 
-    FeedContent(posts = postListMock, {}, {}, modifier = Modifier)
+    FeedContent(posts = postListMock, {}, {})
 }
