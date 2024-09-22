@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.beam.instragramfeed.data.repository.PostRepository
 import com.beam.instragramfeed.domain.model.Post
 import com.beam.instragramfeed.domain.usecase.DeletePostsUseCase
 import com.beam.instragramfeed.domain.usecase.FetchPostsFromRemoteUseCase
@@ -15,7 +16,8 @@ import kotlinx.coroutines.launch
 
 class FeedViewModel(context: Context) : ViewModel() {
 
-    private val getPostsUseCase = GetPostsUseCase(context)
+    private val postRepository = PostRepository(context)
+    private val getPostsUseCase = GetPostsUseCase(postRepository)
     private val fetchPostsFromRemoteUseCase = FetchPostsFromRemoteUseCase(context)
     private val deletePostsUseCase = DeletePostsUseCase(context)
 
