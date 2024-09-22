@@ -5,12 +5,13 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.beam.instragramfeed.data.local.entity.PostEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PostDao {
 
     @Query("SELECT * FROM PostEntity")
-    suspend fun getAll(): List<PostEntity>
+    fun getAll(): Flow<List<PostEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(posts: List<PostEntity>)

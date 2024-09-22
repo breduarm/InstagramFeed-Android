@@ -6,5 +6,5 @@ import com.beam.instragramfeed.data.repository.PostRepository
 class GetPostsUseCase(context: Context) {
     private val repository = PostRepository(context)
 
-    suspend operator fun invoke() = repository.getPostsFromLocal()
+    operator fun invoke() = repository.getPostsFromLocal()
 }

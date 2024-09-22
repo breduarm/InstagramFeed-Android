@@ -10,6 +10,7 @@ import com.beam.instragramfeed.domain.model.Post
 import com.beam.instragramfeed.domain.usecase.DeletePostsUseCase
 import com.beam.instragramfeed.domain.usecase.FetchPostsFromRemoteUseCase
 import com.beam.instragramfeed.domain.usecase.GetPostsUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class FeedViewModel(context: Context) : ViewModel() {
@@ -23,8 +24,14 @@ class FeedViewModel(context: Context) : ViewModel() {
 
     fun onUiReady() {
         viewModelScope.launch {
-            _posts.value = getPostsUseCase()
-            fetchPostsFromRemoteUseCase()
+            launch {
+                getPostsUseCase().collect { collectedPosts ->
+                    _posts.value = collectedPosts
+                }
+            }
+            launch(Dispatchers.IO) {
+                fetchPostsFromRemoteUseCase()
+            }
         }
     }
 
