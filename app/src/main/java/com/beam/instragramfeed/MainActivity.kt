@@ -11,11 +11,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import com.beam.instragramfeed.ui.screens.feed.FeedScreen
 import com.beam.instragramfeed.ui.screens.feed.FeedViewModel
+import com.beam.instragramfeed.ui.screens.feed.FeedViewModelFactory
 import com.beam.instragramfeed.ui.theme.InstragramFeedTheme
 
 class MainActivity : ComponentActivity() {
 
-    private val viewModel: FeedViewModel by viewModels()
+    private val viewModel: FeedViewModel by viewModels {
+        FeedViewModelFactory(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

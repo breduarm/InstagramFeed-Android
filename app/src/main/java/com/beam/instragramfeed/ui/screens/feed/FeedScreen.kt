@@ -29,11 +29,11 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.beam.instragramfeed.domain.model.PostDomain
+import com.beam.instragramfeed.domain.model.Post
 
 @Composable
 fun FeedScreen(viewModel: FeedViewModel, modifier: Modifier) {
-    val posts: List<PostDomain> by viewModel.posts.observeAsState(emptyList())
+    val posts: List<Post> by viewModel.posts.observeAsState(emptyList())
 
     LaunchedEffect(viewModel) {
         viewModel.onUiReady()
@@ -43,7 +43,7 @@ fun FeedScreen(viewModel: FeedViewModel, modifier: Modifier) {
 }
 
 @Composable
-fun FeedContent(posts: List<PostDomain>, onItemClicked: (PostDomain) -> Unit, modifier: Modifier) {
+fun FeedContent(posts: List<Post>, onItemClicked: (Post) -> Unit, modifier: Modifier) {
     Box(modifier = modifier.fillMaxSize()) {
         if (posts.isEmpty()) {
             Text(text = "There is no posts to display", modifier = Modifier.align(Alignment.Center))
@@ -54,7 +54,7 @@ fun FeedContent(posts: List<PostDomain>, onItemClicked: (PostDomain) -> Unit, mo
 }
 
 @Composable
-fun FeedList(posts: List<PostDomain>, onItemClicked: (PostDomain) -> Unit) {
+fun FeedList(posts: List<Post>, onItemClicked: (Post) -> Unit) {
     LazyColumn(verticalArrangement = Arrangement.spacedBy(24.dp)) {
         items(posts) { item ->
             PostItem(item, onItemClicked)
@@ -63,7 +63,7 @@ fun FeedList(posts: List<PostDomain>, onItemClicked: (PostDomain) -> Unit) {
 }
 
 @Composable
-fun PostItem(post: PostDomain, onItemClicked: (PostDomain) -> Unit) {
+fun PostItem(post: Post, onItemClicked: (Post) -> Unit) {
     Column {
         Card(
             shape = RectangleShape, modifier = Modifier.fillMaxWidth(),
@@ -103,7 +103,10 @@ fun FavoriteButton(isFavorite: Boolean, onClick: () -> Unit) {
         if (isFavorite) {
             Icon(imageVector = Icons.Default.Favorite, contentDescription = "Marked as a favorite")
         } else {
-            Icon(imageVector = Icons.Default.FavoriteBorder, contentDescription = "Click to mark as a favorite")
+            Icon(
+                imageVector = Icons.Default.FavoriteBorder,
+                contentDescription = "Click to mark as a favorite"
+            )
         }
     }
 }
@@ -111,20 +114,20 @@ fun FavoriteButton(isFavorite: Boolean, onClick: () -> Unit) {
 @Preview(showSystemUi = true)
 @Composable
 fun FeedScreenPreview() {
-    val postListMock: List<PostDomain> = listOf(
-        PostDomain(
+    val postListMock: List<Post> = listOf(
+        Post(
             id = 1,
             title = "Title 1",
             description = "Description 1",
             imageUrl = "Image 1"
         ),
-        PostDomain(
+        Post(
             id = 2,
             title = "Title 2",
             description = "Description 2",
             imageUrl = "Image 2"
         ),
-        PostDomain(
+        Post(
             id = 3,
             title = "Title 3",
             description = "Description 3",

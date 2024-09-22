@@ -3,22 +3,22 @@ package com.beam.instragramfeed.data.datasource
 import com.beam.instragramfeed.data.remote.api.retrofit
 import com.beam.instragramfeed.data.remote.api.service.PostService
 import com.beam.instragramfeed.data.remote.model.PostResponse
-import com.beam.instragramfeed.domain.model.PostDomain
+import com.beam.instragramfeed.domain.model.Post
 
-interface PostDataSource {
+interface PostRemoteDataSource {
 
-    suspend fun getPosts(): List<PostDomain>
+    suspend fun getPosts(): List<Post>
 }
 
-class PostRemoteDataSource: PostDataSource {
+class PostRetrofitDataSource : PostRemoteDataSource {
     private val service: PostService = retrofit.create(PostService::class.java)
 
-    override suspend fun getPosts(): List<PostDomain> =
+    override suspend fun getPosts(): List<Post> =
         service.getProducts().map { it.toDomain() }
 
 }
 
-fun PostResponse.toDomain() = PostDomain(
+fun PostResponse.toDomain() = Post(
     id = id,
     title = title.orEmpty(),
     description = description.orEmpty(),
