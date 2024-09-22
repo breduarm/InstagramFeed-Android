@@ -11,6 +11,8 @@ interface PostLocalDataSource {
     suspend fun getAllPosts(): List<Post>
 
     suspend fun savePosts(posts: List<Post>)
+
+    suspend fun deletePosts()
 }
 
 class PostRoomDataSource(context: Context) : PostLocalDataSource {
@@ -20,6 +22,10 @@ class PostRoomDataSource(context: Context) : PostLocalDataSource {
 
     override suspend fun savePosts(posts: List<Post>) {
         postDao.insertAll(posts.map { it.toEntity() })
+    }
+
+    override suspend fun deletePosts() {
+        postDao.deleteAll()
     }
 }
 

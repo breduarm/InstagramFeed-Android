@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.beam.instragramfeed.domain.model.Post
+import com.beam.instragramfeed.domain.usecase.DeletePostsUseCase
 import com.beam.instragramfeed.domain.usecase.FetchPostsFromRemoteUseCase
 import com.beam.instragramfeed.domain.usecase.GetPostsUseCase
 import kotlinx.coroutines.launch
@@ -15,6 +16,7 @@ class FeedViewModel(context: Context) : ViewModel() {
 
     private val getPostsUseCase = GetPostsUseCase(context)
     private val fetchPostsFromRemoteUseCase = FetchPostsFromRemoteUseCase(context)
+    private val deletePostsUseCase = DeletePostsUseCase(context)
 
     private val _posts = MutableLiveData<List<Post>>(emptyList())
     val posts: LiveData<List<Post>> = _posts
@@ -33,6 +35,12 @@ class FeedViewModel(context: Context) : ViewModel() {
             } else {
                 item
             }
+        }
+    }
+
+    fun deleteAllPosts() {
+        viewModelScope.launch {
+            deletePostsUseCase()
         }
     }
 }

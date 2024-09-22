@@ -11,12 +11,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Card
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -39,16 +43,39 @@ fun FeedScreen(viewModel: FeedViewModel, modifier: Modifier) {
         viewModel.onUiReady()
     }
 
-    FeedContent(posts, viewModel::addToFavorites, modifier)
+    FeedContent(posts, viewModel::addToFavorites, viewModel::deleteAllPosts, modifier)
 }
 
 @Composable
-fun FeedContent(posts: List<Post>, onItemClicked: (Post) -> Unit, modifier: Modifier) {
-    Box(modifier = modifier.fillMaxSize()) {
-        if (posts.isEmpty()) {
-            Text(text = "There is no posts to display", modifier = Modifier.align(Alignment.Center))
-        } else {
-            FeedList(posts, onItemClicked)
+fun FeedContent(
+    posts: List<Post>,
+    onItemClicked: (Post) -> Unit,
+    onFABClicked: () -> Unit,
+    modifier: Modifier
+) {
+    Scaffold(
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = onFABClicked,
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.primary
+            ) {
+                Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete")
+            }
+        },
+        modifier = modifier.fillMaxSize()
+    ) { innerPadding ->
+        Box(modifier = modifier
+            .fillMaxSize()
+            .padding(innerPadding)) {
+            if (posts.isEmpty()) {
+                Text(
+                    text = "There is no posts to display",
+                    modifier = Modifier.align(Alignment.Center)
+                )
+            } else {
+                FeedList(posts, onItemClicked)
+            }
         }
     }
 }
@@ -135,5 +162,5 @@ fun FeedScreenPreview() {
         )
     )
 
-    FeedContent(posts = postListMock, {}, modifier = Modifier)
+    FeedContent(posts = postListMock, {}, {}, modifier = Modifier)
 }

@@ -22,4 +22,8 @@ class PostRepository(context: Context) {
     private suspend fun savePostsToLocal(posts: List<Post>) {
         localDataSource.savePosts(posts)
     }
+
+    suspend fun deletePostsFromLocal() {
+        localDataSource.deletePosts()
+    }
 }
