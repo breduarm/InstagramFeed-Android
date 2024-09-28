@@ -81,6 +81,11 @@ dependencies {
     implementation(libs.room)
     ksp(libs.room.compiler)
 
+    // Koin
+    val koinBom =  project.dependencies.platform(libs.koin.bom)
+    implementation(koinBom)
+    implementation(libs.koin.core)
+
     // Unit Tests
 
     // MockK
