@@ -85,6 +85,7 @@ dependencies {
     val koinBom =  project.dependencies.platform(libs.koin.bom)
     implementation(koinBom)
     implementation(libs.koin.core)
+    implementation(libs.koin.android)
 
     // Unit Tests
 
