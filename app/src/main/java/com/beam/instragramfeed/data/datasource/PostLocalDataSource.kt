@@ -1,7 +1,5 @@
 package com.beam.instragramfeed.data.datasource
 
-import android.content.Context
-import com.beam.instragramfeed.data.local.AppDataBase
 import com.beam.instragramfeed.data.local.dao.PostDao
 import com.beam.instragramfeed.data.local.entity.PostEntity
 import com.beam.instragramfeed.domain.model.Post
@@ -17,8 +15,7 @@ interface PostLocalDataSource {
     suspend fun deletePosts()
 }
 
-class PostRoomDataSource(context: Context) : PostLocalDataSource {
-    private val postDao: PostDao = AppDataBase.getDataBase(context).postDao()
+class PostRoomDataSource(private val postDao: PostDao) : PostLocalDataSource {
 
     override fun getAllPosts(): Flow<List<Post>> =
         postDao.getAll().map { it.map { postEntity -> postEntity.toDomain() } }
