@@ -2,12 +2,13 @@ package com.beam.instragramfeed.data.repository
 
 import com.beam.instragramfeed.data.datasource.PostLocalDataSource
 import com.beam.instragramfeed.data.datasource.PostRemoteDataSource
-import com.beam.instragramfeed.data.datasource.PostRetrofitDataSource
 import com.beam.instragramfeed.domain.model.Post
 import kotlinx.coroutines.flow.Flow
 
-class PostRepository(private val localDataSource: PostLocalDataSource) {
-    private val remoteDataSource: PostRemoteDataSource = PostRetrofitDataSource()
+class PostRepository(
+    private val remoteDataSource: PostRemoteDataSource,
+    private val localDataSource: PostLocalDataSource,
+) {
 
     suspend fun fetchPostsFromRemote(): List<Post> {
         val remotePosts: List<Post> = remoteDataSource.getPosts()
