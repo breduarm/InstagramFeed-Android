@@ -13,11 +13,14 @@ import com.beam.instragramfeed.domain.usecase.FetchPostsFromRemoteUseCase
 import com.beam.instragramfeed.domain.usecase.GetPostsUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class FeedViewModel(context: Context) : ViewModel() {
+class FeedViewModel(
+    context: Context,
+    private val getPostsUseCase: GetPostsUseCase,
+) : KoinComponent, ViewModel() {
 
-    private val postRepository = PostRepository(context)
-    private val getPostsUseCase = GetPostsUseCase(postRepository)
     private val fetchPostsFromRemoteUseCase = FetchPostsFromRemoteUseCase(context)
     private val deletePostsUseCase = DeletePostsUseCase(context)
 
@@ -51,16 +54,5 @@ class FeedViewModel(context: Context) : ViewModel() {
         viewModelScope.launch {
             deletePostsUseCase()
         }
-    }
-}
-
-class FeedViewModelFactory(
-    private val context: Context,
-) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(FeedViewModel::class.java)) {
-            return FeedViewModel(context) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
