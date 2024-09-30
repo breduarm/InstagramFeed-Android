@@ -1,8 +1,13 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+
+    // KSP and Kapt
     alias(libs.plugins.ksp)
     kotlin("kapt")
+
+    // Realm
+    alias(libs.plugins.realm)
 }
 
 android {
@@ -80,6 +85,9 @@ dependencies {
     // Room
     implementation(libs.room)
     ksp(libs.room.compiler)
+
+    // Realm
+    implementation(libs.realm)
 
     // Koin
     val koinBom =  project.dependencies.platform(libs.koin.bom)

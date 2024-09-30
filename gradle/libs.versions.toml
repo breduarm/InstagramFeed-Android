@@ -22,6 +22,9 @@ retrofit = "2.11.0"
 # Room
 room = "2.6.1"
 
+# Realm
+realm = "1.16.0"
+
 # Koin
 koin = "4.0.0"
 
@@ -58,6 +61,11 @@ retrofit-converter = { group = "com.squareup.retrofit2", name = "converter-gson"
 room = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 
+# Realm
+# // If using coroutines with the SDK
+#   implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0'
+realm = { group = "io.realm.kotlin", name = "library-base", version.ref = "realm" }
+
 # Koin
 koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin" }
 koin-core = { group = "io.insert-koin", name = "koin-core" }
@@ -74,3 +82,6 @@ jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = 
 
 # KSP
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+# Realm
+realm = { id = "io.realm.kotlin", version.ref = "realm" }
