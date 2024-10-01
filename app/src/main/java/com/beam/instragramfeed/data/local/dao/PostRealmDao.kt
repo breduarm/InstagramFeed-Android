@@ -2,20 +2,24 @@ package com.beam.instragramfeed.data.local.dao
 
 import com.beam.instragramfeed.data.local.entity.PostObject
 import io.realm.kotlin.Realm
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.mapLatest
 
 interface PostRealmDao {
 
-    suspend fun getAll(): List<PostObject>
+    fun getAll(): Flow<List<PostObject>>
 
     suspend fun insertAll(posts: List<PostObject>)
 
     suspend fun deleteAll()
 }
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class PostRealmDaoImpl(private val realm: Realm) : PostRealmDao {
 
-    override suspend fun getAll(): List<PostObject> =
-        realm.query(PostObject::class).find()
+    override fun getAll(): Flow<List<PostObject>> =
+        realm.query(PostObject::class).asFlow().mapLatest { it.list }
 
     override suspend fun insertAll(posts: List<PostObject>) {
         realm.writeBlocking {

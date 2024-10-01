@@ -2,6 +2,7 @@ package com.beam.instragramfeed
 
 import android.app.Application
 import com.beam.instragramfeed.di.appModule
+import com.beam.instragramfeed.di.realmModule
 import com.beam.instragramfeed.di.retrofitModule
 import com.beam.instragramfeed.di.roomModule
 import org.koin.android.ext.koin.androidContext
@@ -20,7 +21,7 @@ class InstagramFeedApp : Application() {
         startKoin {
             androidLogger()
             androidContext(this@InstagramFeedApp)
-            modules(appModule, roomModule, retrofitModule)
+            modules(appModule, roomModule, realmModule, retrofitModule)
         }
     }
 }

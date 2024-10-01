@@ -1,6 +1,7 @@
 package com.beam.instragramfeed.di
 
 import com.beam.instragramfeed.data.datasource.PostLocalDataSource
+import com.beam.instragramfeed.data.datasource.PostRealmDataSource
 import com.beam.instragramfeed.data.datasource.PostRemoteDataSource
 import com.beam.instragramfeed.data.datasource.PostRetrofitDataSource
 import com.beam.instragramfeed.data.datasource.PostRoomDataSource
@@ -16,7 +17,8 @@ import org.koin.dsl.module
 
 val appModule = module {
     singleOf(::PostRetrofitDataSource) { bind<PostRemoteDataSource>() }
-    singleOf(::PostRoomDataSource) { bind<PostLocalDataSource>() }
+//    singleOf(::PostRoomDataSource) { bind<PostLocalDataSource>() }
+    singleOf(::PostRealmDataSource) { bind<PostLocalDataSource>() }
     singleOf(::PostRepository)
     singleOf(::GetPostsUseCase)
     singleOf(::FetchPostsFromRemoteUseCase)
