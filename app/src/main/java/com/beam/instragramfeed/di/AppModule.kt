@@ -11,15 +11,23 @@ import com.beam.instragramfeed.domain.usecase.FetchPostsFromRemoteUseCase
 import com.beam.instragramfeed.domain.usecase.GetPostsUseCase
 import com.beam.instragramfeed.ui.screens.feed.FeedViewModel
 import org.koin.core.module.dsl.bind
+import org.koin.core.module.dsl.named
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
+import org.koin.core.qualifier.named as qualifierNamed
 
 val appModule = module {
     singleOf(::PostRetrofitDataSource) { bind<PostRemoteDataSource>() }
-//    singleOf(::PostRoomDataSource) { bind<PostLocalDataSource>() }
-    singleOf(::PostRealmDataSource) { bind<PostLocalDataSource>() }
-    singleOf(::PostRepository)
+    singleOf(::PostRoomDataSource) {
+        named("room")
+        bind<PostLocalDataSource>()
+    }
+    singleOf(::PostRealmDataSource) {
+        named("realm")
+        bind<PostLocalDataSource>()
+    }
+    single { PostRepository(get(), get(qualifier = qualifierNamed("realm"))) }
     singleOf(::GetPostsUseCase)
     singleOf(::FetchPostsFromRemoteUseCase)
     singleOf(::DeletePostsUseCase)
