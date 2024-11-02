@@ -1,14 +1,14 @@
 [versions]
-agp = "8.8.0"
+agp = "8.8.2"
 kotlin = "1.9.22"
-coreKtx = "1.13.1"
+coreKtx = "1.16.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-lifecycleRuntimeKtx = "2.8.6"
-activityCompose = "1.9.2"
-composeBom = "2024.09.02"
-runtimeLivedata = "1.7.2"
+lifecycleRuntimeKtx = "2.8.7"
+activityCompose = "1.10.1"
+composeBom = "2025.04.00"
+runtimeLivedata = "1.7.8"
 
 # KSP
 ksp = "1.9.22-1.0.16"
@@ -26,7 +26,7 @@ room = "2.6.1"
 realm = "1.16.0"
 
 # Koin
-koin = "4.0.0"
+koin = "4.0.3"
 
 # Unit Tests
 
